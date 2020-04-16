@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>FIRST</artifactId>
+        <groupId>com.sys.gree</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>first-web</artifactId>
+
+    <dependencies>
+        <!-- 引入 service 模块，该模块已经引入了 common 模块的pom 所以这里不用再次进行引入 -->
+        <dependency>
+            <groupId>com.sys.gree</groupId>
+            <artifactId>first-service</artifactId>
+        </dependency>
+
+        <!-- web 模块需要的其他jar包 -->
+
+
+    </dependencies>
+
+
+</project>

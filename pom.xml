@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sys.gree</groupId>
+    <artifactId>FIRST</artifactId>
+    <!--    -->
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>first-common</module>
+        <module>first-dao</module>
+        <module>first-domain</module>
+        <module>first-export</module>
+        <module>first-service</module>
+        <module>first-web</module>
+    </modules>
+
+    <!-- 对项目其他模块的版本进行统一的管理 -->
+    <properties>
+        <project.release.version>1.0-SNAPSHOT</project.release.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 使用spring-io和 spring-cloud进行版本依赖管理，防止自己制定版本导致与spring版本不兼容 -->
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>Cairo-SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 本项目模块 -->
+            <dependency>
+                <groupId>com.sys.gree</groupId>
+                <artifactId>first-common</artifactId>
+                <version>${project.release.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sys.gree</groupId>
+                <artifactId>first-dao</artifactId>
+                <version>${project.release.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sys.gree</groupId>
+                <artifactId>first-domain</artifactId>
+                <version>${project.release.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sys.gree</groupId>
+                <artifactId>first-export</artifactId>
+                <version>${project.release.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sys.gree</groupId>
+                <artifactId>first-service</artifactId>
+                <version>${project.release.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sys.gree</groupId>
+                <artifactId>first-web</artifactId>
+                <version>${project.release.version}</version>
+            </dependency>
+
+            <!-- 权限控制 shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>1.5.2</version>
+            </dependency>
+            <!-- shiro 标签 -->
+            <dependency>
+                <groupId>net.mingsoft</groupId>
+                <artifactId>shiro-freemarker-tags</artifactId>
+            </dependency>
+            <!-- poi 4.0.1 需要jdk1.8 对Microsoft文件进行处理  -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>4.0.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>4.0.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- mybatis plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>3.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baonidou</groupId>
+                <artifactId>mybatisplus-spring-boot-starter</artifactId>
+                <version>3.0.1</version>
+            </dependency>
+
+            <!-- 加密 -->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>2.1.2</version>
+            </dependency>
+
+            <!-- hutool 工具类 5.0 jdk 1.8+ -->
+            <!-- 核心，包括Bean操作、日期、各种Util等 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>5.2.5</version>
+            </dependency>
+            <!-- 基于HttpUrlConnection的Http客户端封装 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-http</artifactId>
+                <version>5.2.5</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 引入maven编译插件 系统版本构建 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+        <!-- 设置资源文件 -->
+        <resources>
+            <!-- 这个语句，在pom文件更新的时候会改变项目目录的属性信息 -->
+            <!--<resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>-->
+
+            <!-- 指定资源文件的位置 -->
+            <resource>
+                <directory>src/main/resource</directory>
+            </resource>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resource</directory>
+                <!-- 对本身的配置文件不进行读取 -->
+                <excludes>
+                    <!-- 开发环境 -->
+                    <!--                    <exclude>application-dev.yml</exclude>-->
+                    <exclude>application-dev.properties</exclude>
+                    <!-- 生产环境 -->
+                    <!--                    <exclude>application-pro.yml</exclude>-->
+                    <exclude>application-pro.properties</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resource</directory>
+                <includes>
+                    <!-- 含有变量的配置文件，这个实际上用不到，{env}环境是在主配置文件中制定的 -->
+                    <include>application-{env}.properties</include>
+                    <!-- 主配置文件 -->
+                    <include>application.properties</include>
+                </includes>
+            </resource>
+
+        </resources>
+    </build>
+
+    <!-- 多环境版本 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>pro</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <env>pro</env>
+            </properties>
+        </profile>
+    </profiles>
+    <!-- 制定仓库地址 -->
+    <distributionManagement>
+        <!-- 稳定版本 -->
+        <repository>
+            <id>release</id>
+            <name>release</name>
+            <url></url>
+        </repository>
+        <!-- 开发版本 -->
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>snapshots</name>
+            <url></url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+
+</project>
