@@ -1,7 +1,7 @@
-package main.java.com.gree.function;
+package com.gree.function;
 
-import com.sys.gree.user.daomain.Student;
-import com.sys.gree.user.daomain.Subject;
+
+import com.gree.user.daomain.Student;
 
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ public class OptionalFunction {
         student.setName("小明");
         student.setAge(20);
 
-        Subject subject = new Subject();
+        main.java.com.gree.user.daomain.Subject subject = new main.java.com.gree.user.daomain.Subject();
         subject.setYuwen(99);
         subject.setShuxue(100);
         student.setSubject(subject);
@@ -34,7 +34,7 @@ public class OptionalFunction {
                 .orElse(null);
         Double aDouble = Optional.ofNullable(student)
                 .map(Student::getSubject)
-                .map(Subject::getShuxue)
+                .map(main.java.com.gree.user.daomain.Subject::getShuxue)
                 .orElse(0.0);
 
         System.out.println("-------name------->" + s);

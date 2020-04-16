@@ -184,12 +184,12 @@
         <!-- 设置资源文件 -->
         <resources>
             <!-- 这个语句，在pom文件更新的时候会改变项目目录的属性信息 -->
-            <!--<resource>
+            <resource>
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
-            </resource>-->
+            </resource>
 
             <!-- 指定资源文件的位置 -->
             <resource>

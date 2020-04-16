@@ -1,7 +1,6 @@
-package main.java.com.gree.function;
+package com.gree.function;
 
-import com.sys.gree.user.daomain.Student;
-import com.sys.gree.user.daomain.Subject;
+import com.gree.user.daomain.Student;
 
 import java.util.function.Consumer;
 
@@ -14,7 +13,7 @@ public class ConsumerFunction {
 
     public static void main(String[] args) {
         Student student = new Student();
-        Subject subject = new Subject();
+        main.java.com.gree.user.daomain.Subject subject = new main.java.com.gree.user.daomain.Subject();
 
         student.setId("2020041305");
         student.setName("小红");
