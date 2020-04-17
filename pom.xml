@@ -92,6 +92,7 @@
             <dependency>
                 <groupId>net.mingsoft</groupId>
                 <artifactId>shiro-freemarker-tags</artifactId>
+                <version>1.0.1</version>
             </dependency>
             <!-- poi 4.0.1 需要jdk1.8 对Microsoft文件进行处理  -->
             <dependency>
