@@ -1,10 +1,14 @@
 package main.java.com.gree.encryptor;
 
+import com.alibaba.fastjson.JSONObject;
+import com.gree.user.daomain.Student;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -29,6 +33,11 @@ public class EncryptorMain {
      * @param args
      */
     public static void main(String[] args) {
+
+        Map<String, String> map = new HashMap<>();
+
+        Student student = JSONObject.parseObject(JSONObject.toJSONString(map), Student.class);
+
         Consumer consumer = System.out::println;
 
         BasicTextEncryptor basicTextEncryptor = new BasicTextEncryptor();

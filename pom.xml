@@ -223,11 +223,12 @@
         </resources>
     </build>
 
-    <!-- 多环境版本 -->
+    <!-- 多环境版本 配置文件中使用的 @env@ 则直接在这里进行修改即可将对应的配置文件生效 -->
     <profiles>
         <profile>
             <id>dev</id>
             <activation>
+                <!-- 使用开发环境 将这个 设置为true -->
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
@@ -237,6 +238,7 @@
         <profile>
             <id>pro</id>
             <activation>
+                <!-- 使用生产环境将这个设置为 true -->
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>

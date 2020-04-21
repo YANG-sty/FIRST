@@ -1,7 +1,5 @@
 package com.gree.token.dto;
 
-import com.sun.tools.internal.ws.processor.modeler.annotation.AnnotationProcessorContext;
-
 import javax.xml.crypto.Data;
 import java.io.Serializable;
 
