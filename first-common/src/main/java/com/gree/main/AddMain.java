@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -23,6 +24,10 @@ public class AddMain {
         map.put("name", "yang_zzu");
         map.put("age", "21");
         map.put("phone", "16675673726");
+        Set<String> strings = map.keySet();
+        String phone = "phone";
+//        map.get(phone).
+        consumer.accept("map.................>" + strings);
         //map 对象直接输出
         consumer.accept("--------------->" + map);
         //map 转为 JSON 对象

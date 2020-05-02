@@ -1,0 +1,1082 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/page/public/tag.jsp"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:jsp="http://java.sun.com/JSP/Page">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" type="image" href="../statics/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="../statics/img/logo.png">
+    <title><jsp:include page="/WEB-INF/page/public/top_title.jsp"/></title>
+    <link rel="stylesheet" href="${contextPath}/statics/css/layui.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/statics/css/fresh_style.css" media="all">
+    <link rel="stylesheet" href="${contextPath}/statics/css/iconfont.css" media="all">
+    <style>
+        .apply-find {
+            border: none;
+            padding: 0;
+        }
+        .apply-find .layui-form-item {
+            width: 25%;
+        }
+        .apply-find .layui-form-item .layui-input-block {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        .layui-table th {
+            background: #fff;
+        }
+        /* 防止下拉框的下拉列表被隐藏---必须设置--- */
+        .layui-table-cell {
+            overflow: visible;
+        }
+
+        .layui-table-view, .layui-table-box {
+            overflow: visible;
+        }
+
+        .layui-table-body {
+            overflow: visible;
+        }
+        .layui-table .layui-input {
+            top: 5px;
+        }
+    </style>
+</head>
+<body >
+<div  style="padding:15px;">
+    <blockquote class="layui-elem-quote"><span class="layui-breadcrumb" style="visibility: visible;"> <a href="main.html">首页</a><span lay-separator="">/</span> <a><cite>种植计划</cite></a> </span>
+    </blockquote>
+    <div class="layui-form layui-form-pane1" action="">
+        <div class="condition_add">
+            <div class="apply-find" >
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <select name="plantingarea" lay-verify="required">
+                            <option  value="">选择区域</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input name="variety" type="text" id="tree" lay-filter="tree" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <select name="plantingstandard" lay-verify="required">
+                            <option  value="">选择种植标准 </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" id="getlist">获取</button>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="layui-card-header">计划参考</div>
+            <div class="layui-card-body">
+                <div id="planconsult" class="layui-collapse" lay-filter="component-panel1">
+                    <div class="none-jh"></div>
+                </div>
+            </div>
+
+            <div style=" position:absolute; right:-52px; top:300px;">
+                <button id="add" class="layui-btn" style="padding-left:10px; padding-right:10px;"><i class="layui-icon"></i></button><br><br>
+                <button id="addall" class="layui-btn" style="padding-left:10px; padding-right:10px;"><i class="layui-icon layui-icon-next"></i></button>
+            </div>
+        </div>
+
+
+        <div class="condition_term">
+            <div class="apply-find">
+                <div class="layui-input-inline" style=" padding:5px 0 5px 10px;">
+                    <button id="savedata" class="layui-btn">制定计划</button>
+                    <button id="adddata" class="layui-btn layui-btn-normal">添加农事计划</button>
+                </div></div>
+            <div class="layui-card-header">种植计划</div>
+            <div class="layui-card-body">
+                <div id="plantingplan" class="layui-collapse" lay-filter="component-panel2">
+                    <div class="none-jh"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <script type="text/javascript" src="${contextPath}/statics/layui.js"></script>
+    <script type="text/javascript" src="${contextPath}/statics/layui/lay/module/common.js"></script>
+
+    <script>
+
+        layui.use(['element','table','layer','form','treeSelect','jquery'], function(){
+            var element = layui.element,
+                table = layui.table,
+                layer = layui.layer,
+                form = layui.form,
+                treeSelect = layui.treeSelect,
+                $ = layui.jquery;
+            //品种树
+            treeSelect.render({
+                // 选择器
+                elem: '#tree',
+                // 数据
+                data: '${contextPath}/plantinginformation/toTreeSelect',
+                // 异步加载方式：get/post，默认get
+                type: 'get',
+                // 占位符
+                placeholder: '选择品种',
+                // 是否开启搜索功能：true/false，默认false
+                search: true,
+                // 点击回调
+                click: function(d){
+
+                    $("input[name=variety]").val(d.current.id);
+
+                },
+                // 加载完成后的回调函数
+                success: function (d) {
+
+//	        选中节点，根据id筛选
+                    //treeSelect.checkNode('tree', 1001);
+
+//	        获取zTree对象，可以调用zTree方法
+//	        var treeObj = treeSelect.zTree('tree');
+//	        console.log(treeObj);
+
+//	        刷新树结构
+                    // treeSelect.refresh('tree');
+                }
+            });
+            //下拉框加载
+            $(function () {
+
+                $.each(${bPI_BasePartitionInformation},function(index,value){
+                    var opt = "<option value="+value.id+">"+value.partitionname+"</option>";
+                    $("select[name=plantingarea]").append(opt);
+                });
+
+                $.each(${pS_PlantingStandard},function(index,value){
+                    var opt = "<option value="+value.id+">"+value.standard+"</option>";
+                    $("select[name=plantingstandard]").append(opt);
+                });
+
+                form.render('select');
+
+            });
+            //获取参考计划数据
+            var listdata;
+            $('#getlist').on("click",function(e){
+
+                var plantingarea = $("select[name=plantingarea]").val();
+                var plantingstandard = $("select[name=plantingstandard]").val();
+                var variety = $("input[name=variety]").val();
+
+                if(plantingarea && plantingstandard && variety) {
+
+                    $.ajax({
+                        url:"${contextPath}/plantingplan/getListData",
+                        async:true,
+                        type:"post",
+                        data:{"plantingarea":plantingarea,"plantingstandard":plantingstandard,"variety":variety},
+                        success:function(data){
+                            if(typeof(data) == 'string'){
+                                data = JSON.parse(data)
+                            }
+                            listdata = data.data;
+                            if(!$.isEmptyObject(listdata)){
+
+                                $("#planconsult").html("");
+                                $("#plantingplan").html("<div class='none-jh'></div>");
+                                var i = 0;
+                                $.each(listdata,function(index,value){
+
+                                    var elem = "<div class='layui-colla-item'>"+
+                                        "<h2 class='layui-colla-title'>"+index+"</h2>"+
+                                        "<div class='layui-colla-content layui-show'><table id='table"+i+"'></table></div></div>";
+
+                                    $('#planconsult').append(elem);
+                                    element.render('collapse','component-panel1');
+                                    table.render({
+                                        elem: '#table'+i
+                                        ,data: value
+                                        ,cols: [[ //表头
+                                            {type:'checkbox'}
+                                            ,{type:'numbers', title: '序号'}
+                                            ,{field: 'classifyoperationname', title: '农事分类'}
+                                            ,{field: 'classifyoperationnametwo', title: '农事操作'}
+                                            ,{field: 'cycle', title: '周期(天)'}
+                                            ,{title: '阶段(第_天-第_天)',templet: function(d){
+                                                    return '第'+ d.stagebegin +'天-第'+ d.stageend +'天'
+                                                }}
+                                        ]]
+                                    });
+                                    i++;
+
+                                });
+
+                            } else {
+                                layer.msg("暂无参考计划");
+                                $("#planconsult").html("<div class='none-jh'></div>");
+                                $("#plantingplan").html("<div class='none-jh'></div>");
+
+                            }
+
+                        }
+                    });
+
+                } else {
+
+                    layer.msg("请选择条件");
+
+                }
+
+            });
+
+            //复选框添加计划
+            var tabledata = [];
+            $('#add').on("click",function(e){
+
+                if($('#planconsult').find('.layui-colla-item').length == 0){
+                    layer.msg("请先选择计划");
+                } else {
+
+                    var i = 0,j = 0;
+                    var isselect = false;
+                    $('#planconsult').find('.layui-colla-item').each(function(e){
+
+                        var checkStatus = table.checkStatus('table'+i); //test即为基础参数id对应的值
+
+                        var data = checkStatus.data;
+
+                        if(data.length != 0) {
+                            isselect = true;
+                            if(j==0){
+                                $("#plantingplan").html("");
+                                tabledata = [];
+                                j++;
+                            }
+
+                            var elem = "<div class='layui-colla-item'>"+
+                                "<h2 class='layui-colla-title'>"+data[0].growingperiod+"</h2>"+
+                                "<div class='layui-colla-content layui-show'><table name="+data[0].growingperiod+" id='savetable"+i+"' lay-filter='tablefilter'></table></div></div>";
+
+                            $('#plantingplan').append(elem);
+                            element.render('collapse','component-panel2');
+                            table.render({
+                                elem: '#savetable'+i
+                                ,data: data
+                                ,cols: [[ //表头
+                                    {type:'numbers', title: '序号'}
+                                    ,{field: 'classifyoperationname', title: '农事分类'}
+                                    ,{field: 'classifyoperationnametwo', title: '农事操作'}
+                                    ,{field: 'cycle', title: '周期(天)'}
+                                    ,{title: '阶段(第_天-第_天)', width:150, templet: '#savestagetool'}
+                                    ,{title: '操作',align:'center', toolbar: '#bar'}
+                                ]],done: function(res, curr, count){
+
+                                    $.each(res.data,function(index,value){
+
+                                        tabledata.push(value);
+
+                                    });
+
+                                    //数据回显
+                                    $('#'+this.id).next().find('tr').each(function(e){
+                                        var $cr=$(this);
+                                        var dataindex = $cr.attr("data-index");
+                                        $.each(res.data,function(index,value){
+                                            if(value.LAY_TABLE_INDEX==dataindex){
+                                                $cr.find("input[name=savestagebegin]").val(value.stagebegin);
+                                                $cr.find("input[name=savestageend]").val(value.stageend);
+                                            }
+
+                                        });
+                                    });
+
+                                }
+                            });
+
+                        }
+                        i++;
+                    });
+
+                    if(!isselect){
+
+                        layer.msg("请先选择计划");
+
+                    }
+
+                }
+
+            });
+            //全部添加
+            $('#addall').on("click",function(e){
+                if(!$.isEmptyObject(listdata)){
+
+                    tabledata = [];
+                    $("#plantingplan").html("");
+                    var i = 0;
+                    $.each(listdata,function(index,value){
+
+                        var elem = "<div class='layui-colla-item'>"+
+                            "<h2 class='layui-colla-title'>"+index+"</h2>"+
+                            "<div class='layui-colla-content layui-show'><table name="+index+" id='savetable"+i+"' lay-filter='tablefilter'></table></div></div>";
+
+                        $('#plantingplan').append(elem);
+                        element.render('collapse','component-panel2');
+                        table.render({
+                            elem: '#savetable'+i
+                            ,data: value
+                            ,cols: [[ //表头
+                                {type:'numbers', title: '序号'}
+                                ,{field: 'classifyoperationname', title: '农事分类'}
+                                ,{field: 'classifyoperationnametwo', title: '农事操作'}
+                                ,{field: 'cycle', title: '周期(天)'}
+                                ,{title: '阶段(第_天-第_天)', width:150, templet: '#savestagetool'}
+                                ,{title: '操作',align:'center', toolbar: '#bar'}
+                            ]],done: function(res, curr, count){
+
+                                $.each(res.data,function(index,value){
+
+                                    tabledata.push(value);
+
+                                });
+
+                                //数据回显
+                                $('#'+this.id).next().find('tr').each(function(e){
+                                    var $cr=$(this);
+                                    var dataindex = $cr.attr("data-index");
+                                    $.each(res.data,function(index,value){
+                                        if(value.LAY_TABLE_INDEX==dataindex){
+                                            $cr.find("input[name=savestagebegin]").val(value.stagebegin);
+                                            $cr.find("input[name=savestageend]").val(value.stageend);
+                                        }
+
+                                    });
+                                });
+
+                            }
+                        });
+                        i++;
+                    });
+                } else {
+
+                    layer.msg("请先获取计划");
+
+                }
+
+            });
+            //添加农事计划弹出框初始化
+            var planmap = new Map();
+            $('#adddata').on("click",function(e){
+
+                var plantingarea = $("select[name=plantingarea]").val();
+                var plantingstandard = $("select[name=plantingstandard]").val();
+                var variety = $("input[name=variety]").val();
+
+                if(plantingarea && plantingstandard && variety) {
+
+                    layer.open({
+                        type: 1,
+                        title:'新增',
+                        btn: ['保存', '关闭'],
+                        maxmin: true,
+                        area: ['1000px', '540px'],
+                        scrollbar: false,
+                        content: '<div id="addplan" style="padding:15px"></div>',
+                        success: function(layero, index){
+
+                            $.ajax({
+                                url:"${contextPath}/plantingplan/getGrowthModel",
+                                async:true,
+                                type:"post",
+                                data:{"variety":variety},
+                                success:function(data){
+                                    if(typeof(data) == 'string'){
+                                        data = JSON.parse(data)
+                                    }
+                                    $("#addplan").html("");
+                                    var i = 0;
+                                    planmap.clear();
+                                    if(data.data.length==0){
+                                        layer.msg("没有找到模型数据");
+                                    }else{
+                                        $.each(data.data,function(index,value){
+
+                                            var elem = "<div name="+value.id+" class='apply-list-titbtn' style='margin-top:20px;'>"
+                                                +value.growingperiod+"<button 'addrow(this)' class='layui-btn layui-btn-xs titbtn'>"+
+                                                "<i class='layui-icon layui-icon-add-1'></i></button></div>"+
+                                                "<div class='layui-form layui-border-box layui-table-view' style='margin-top:0px;padding:0px 10px'>"+
+                                                "<table name="+value.growingperiod+" id='addplantable"+i+"' lay-filter='addtablefilter'></table></div>";
+
+                                            $('#addplan').append(elem);
+                                            table.render({
+                                                elem: '#addplantable'+i
+                                                ,data: [{  "plantingclassify": ""
+                                                    ,"plantingoperation": ""
+                                                    ,"plantingdemand": ""
+                                                    ,"operator": ""
+                                                    ,"input": ""
+                                                    ,"farmmachinery": ""
+                                                    ,"cycle": ""
+                                                    ,"growthmodelid":value.id
+                                                    ,"growingperiod":value.growingperiod
+                                                    ,"stagebegin":""
+                                                    ,"stageend":""
+                                                    ,"variety":value.varietycode
+                                                    ,"classifyoperationname":""
+                                                    ,"classifyoperationnametwo":""
+                                                }]
+                                                ,cols: [[ //表头
+                                                    {type:'numbers', title: '序号'}
+                                                    ,{field: 'plantingclassify', title: '农事分类',templet: '#plantingclassifytool'}
+                                                    ,{field: 'plantingoperation', title: '农事操作',templet: '#plantingoperationtool'}
+                                                    ,{field: 'plantingdemand', title: '农事要求',edit: 'text'}
+                                                    ,{field: 'operator', title: '操作工时(小时/亩)',edit: 'text'}
+                                                    ,{field: 'input', title: '投入品',templet: '#inputtool'}
+                                                    ,{field: 'farmmachinery', title: '农机',templet: '#farmmachinerytool'}
+                                                    ,{field: 'cycle', title: '周期(天)',edit: 'text'}
+                                                    ,{title: '阶段(第_天-第_天)',width:150,templet: '#stagetool'}
+                                                    ,{title: '操作',align:'center', toolbar: '#bar'}
+                                                ]],
+                                                done: function(res, curr, count){
+                                                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                                                    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                                                    planmap.set(value.growingperiod,res.data);
+                                                    //数据回显
+                                                    $('#'+this.id).next().find('tr').each(function(e){
+                                                        var $cr=$(this);
+                                                        var dataindex = $cr.attr("data-index");
+                                                        $.each(res.data,function(index,value){
+                                                            if(value.LAY_TABLE_INDEX==dataindex){
+                                                                $cr.find("select[name=plantingclassifytool]").val(value.plantingclassify);
+
+                                                                $.ajax({
+                                                                    url:"${contextPath}/plantingplan/getOperation",
+                                                                    async:true,
+                                                                    type:"post",
+                                                                    data:{"classifyoperationcode":value.plantingclassify},
+                                                                    success:function(operationdata){
+                                                                        if(typeof(operationdata) == 'string'){
+                                                                            operationdata = JSON.parse(operationdata)
+                                                                        }
+
+                                                                        $cr.find("select[name=plantingoperationtool]").html("<option value=>请选择</option>");
+
+                                                                        $.each(operationdata.data,function(index,value){
+                                                                            var opt = "<option value="+value.classifyoperationcode+">"+value.classifyoperationname+"</option>";
+                                                                            $cr.find("select[name=plantingoperationtool]").append(opt);
+                                                                        });
+                                                                        form.render('select');
+                                                                        $cr.find("select[name=plantingoperationtool]").val(value.plantingoperation);
+
+                                                                    }
+
+                                                                });
+
+                                                                $cr.find("select[name=farmmachinerytool]").val(value.farmmachinery);
+                                                                $cr.find("input[name=stagebegin]").val(value.stagebegin);
+                                                                $cr.find("input[name=stageend]").val(value.stageend);
+                                                                form.render('select');
+
+                                                                //投入品回显
+                                                                if(value.inputcon&&value.inputcon.length!=0){
+                                                                    var inputelem = $cr.find("div[name=input]");
+
+                                                                    inputelem.removeClass();
+                                                                    inputelem.html("");
+                                                                    $.each(value.inputcon,function(index,value){
+
+                                                                        inputelem.append(value.enteringgoodsname);
+
+                                                                    });
+                                                                }
+
+                                                            }
+
+                                                        });
+                                                    });
+
+                                                }
+                                            });
+                                            i++;
+
+                                        });
+                                    }
+                                }
+                            });
+
+                        },
+                        yes: function(index, layero){
+
+                            $.each(tabledata,function(index,value){
+
+                                var modelname = value.growingperiod;
+                                var iscontains = planmap.has(modelname);
+
+                                if(iscontains) {
+                                    planmap.get(modelname).push(value);
+                                } else {
+                                    planmap.set(modelname,value);
+                                }
+
+                            });
+
+                            tabledata = [];
+                            $("#plantingplan").html("");
+                            var i = 0;
+                            planmap.forEach(function(value,index){
+
+                                var elem = "<div class='layui-colla-item'>"+
+                                    "<h2 class='layui-colla-title'>"+index+"</h2>"+
+                                    "<div class='layui-colla-content layui-show'><table name="+index+" id='savetable"+i+"' lay-filter='tablefilter'></table></div></div>";
+
+                                $('#plantingplan').append(elem);
+                                element.render('collapse','component-panel2');
+                                table.render({
+                                    elem: '#savetable'+i
+                                    ,data: value
+                                    ,cols: [[ //表头
+                                        {type:'numbers', title: '序号'}
+                                        ,{field: 'classifyoperationname', title: '农事分类'}
+                                        ,{field: 'classifyoperationnametwo', title: '农事操作'}
+                                        ,{field: 'cycle', title: '周期(天)'}
+                                        ,{title: '阶段(第_天-第_天)', width:150, templet: '#savestagetool'}
+                                        ,{title: '操作',align:'center', toolbar: '#bar'}
+                                    ]],done: function(res, curr, count){
+
+                                        $.each(res.data,function(index,value){
+
+                                            tabledata.push(value);
+
+                                        });
+
+                                        //数据回显
+                                        $('#'+this.id).next().find('tr').each(function(e){
+                                            var $cr=$(this);
+                                            var dataindex = $cr.attr("data-index");
+                                            $.each(res.data,function(index,value){
+                                                if(value.LAY_TABLE_INDEX==dataindex){
+                                                    $cr.find("input[name=savestagebegin]").val(value.stagebegin);
+                                                    $cr.find("input[name=savestageend]").val(value.stageend);
+                                                }
+
+                                            });
+                                        });
+
+                                    }
+                                });
+                                i++;
+
+                            });
+                            layer.close(index);
+                        }
+                    });
+                } else {
+                    layer.msg("请选择条件");
+                }
+
+            });
+
+            //添加行
+            window.addrow = function(e){
+                var variety = $("input[name=variety]").val();
+                var $cr=$(e);
+                var model = $cr.parent().text();//生长模型名字
+                var modelid = $cr.parent().attr("name");//生长模型id
+                var tableid = $('#addplan').find("table[name="+model+"]").attr("id");//表id
+                //获得当前模型的全部数据
+                var thistabledata = planmap.get(model);
+
+                thistabledata.push({"plantingclassify": ""
+                    ,"plantingoperation": ""
+                    ,"plantingdemand": ""
+                    ,"operator": ""
+                    ,"input": ""
+                    ,"farmmachinery": ""
+                    ,"cycle": ""
+                    ,"growthmodelid":modelid
+                    ,"growingperiod":model
+                    ,"stagebegin":""
+                    ,"stageend":""
+                    ,"variety":variety
+                    ,"classifyoperationname":""
+                    ,"classifyoperationnametwo":""
+                });
+
+                table.reload(tableid, {
+                    data: thistabledata
+                });
+            }
+
+            //监听种植计划 删除方法
+            table.on('tool(tablefilter)', function(obj){
+                    if(obj.event === 'del'){
+                        var dataindex = obj.tr.attr("data-index");
+
+                        $.each(tabledata,function(index,value){
+                            if(value.growthmodelid == obj.data.growthmodelid && value.LAY_TABLE_INDEX == dataindex){
+                                tabledata.splice(index,1);
+                                return false; //跳出循环
+                            }
+
+                        });
+                        var tbodyelem = obj.tr.parent();
+                        obj.del();
+
+                        if(tbodyelem.find('tr').length == 0) {
+                            tbodyelem.parents('.layui-colla-item').remove();
+                        }
+
+                        if($("#plantingplan").find('.layui-colla-item').length == 0) {
+                            $("#plantingplan").html("<div class='none-jh'></div>");
+                        }
+
+                    };
+                }
+            );
+
+            //监听添加计划 删除方法
+            table.on('tool(addtablefilter)', function(obj){
+                    if(obj.event === 'del'){
+
+                        var elem = obj.tr;//行对象
+                        var dataindex = elem.attr("data-index");//行坐标
+                        var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                        var tablename = tableelem.attr("name");//table名称
+                        var tablenamedata = planmap.get(tablename);//当前table所有数据
+                        var newtablenamedata = [];
+                        $.each(tablenamedata,function(index,value){
+                            if(value.LAY_TABLE_INDEX!=dataindex){
+                                newtablenamedata.push(value);
+                            }
+                        });
+                        planmap.set(tablename,newtablenamedata);
+                        obj.del();
+
+                    };
+                }
+            );
+            //保存
+            $('#savedata').on("click",function(e){
+                if(tabledata.length == 0) {
+                    layer.msg("请先选择计划");
+                } else {
+                    $.ajax({
+                        url:"${contextPath}/plantingplan/toSave",
+                        async:true,
+                        type:"post",
+                        contentType:"application/json;charset=utf-8",
+                        data:JSON.stringify(tabledata),
+                        success:function(data){
+                            if(typeof(data) == 'string'){
+                                data = JSON.parse(data)
+                            }
+                            if(data.code == 0){
+                                layer.msg(data.msg);
+                                window.location.href="${contextPath}/orchardfarming/toIndex";
+                            }else{
+                                layer.msg(data.msg);
+                            }
+
+                        }
+                    });
+                }
+            });
+            //农事分类
+            form.on('select(plantingclassifytool)', function(data){
+
+                var elem = data.othis.parents('tr');//行对象
+                var dataindex = elem.attr("data-index");//行坐标
+                var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                var tablename = tableelem.attr("name");//table名称
+                var tablenamedata = planmap.get(tablename);//当前table所有数据
+
+                $.each(tablenamedata,function(index,value){
+                    if(value.LAY_TABLE_INDEX==dataindex){
+                        //农事分类id赋值
+                        value.plantingclassify = data.value;
+                        //农事分类名称赋值
+                        var classifyoperationname = elem.find("td[data-field='plantingclassify']").find("option[value="+data.value+"]").text();
+                        value.classifyoperationname = classifyoperationname;
+                        //清空农事操作的id与名称
+                        value.classifyoperationnametwo = "";
+                        value.plantingoperation = "";
+                    }
+                });
+                console.log(tablenamedata);
+                $.ajax({
+                    url:"${contextPath}/plantingplan/getOperation",
+                    async:true,
+                    type:"post",
+                    data:{"classifyoperationcode":data.value},
+                    success:function(operationdata){
+                        if(typeof(operationdata) == 'string'){
+                            operationdata = JSON.parse(operationdata)
+                        }
+
+                        elem.find("select[name=plantingoperationtool]").html("<option value=>请选择</option>");
+                        //农事操作联动赋值
+                        $.each(operationdata.data,function(index,value){
+                            var opt = "<option value="+value.classifyoperationcode+">"+value.classifyoperationname+"</option>";
+                            elem.find("select[name=plantingoperationtool]").append(opt);
+                        });
+
+                        form.render('select');
+
+                    }
+                });
+
+            });
+            //农事操作
+            form.on('select(plantingoperationtool)', function(data){
+
+                var elem = data.othis.parents('tr');//行对象
+                var dataindex = elem.attr("data-index");//行坐标
+                var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                var tablename = tableelem.attr("name");//table名称
+                var tablenamedata = planmap.get(tablename);//当前table所有数据
+
+                $.each(tablenamedata,function(index,value){
+                    if(value.LAY_TABLE_INDEX==dataindex){
+                        value.plantingoperation = data.value;
+                        var classifyoperationnametwo = elem.find("td[data-field='plantingoperation']").find("option[value="+data.value+"]").text();
+                        value.classifyoperationnametwo = classifyoperationnametwo;
+                    }
+                });
+
+            });
+
+            //农机
+            form.on('select(farmmachinerytool)', function(data){
+
+                var elem = data.othis.parents('tr');//行对象
+                var dataindex = elem.attr("data-index");//行坐标
+                var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                var tablename = tableelem.attr("name");//table名称
+                var tablenamedata = planmap.get(tablename);//当前table所有数据
+
+                $.each(tablenamedata,function(index,value){
+                    if(value.LAY_TABLE_INDEX==dataindex){
+                        value.farmmachinery = data.value;
+                    }
+                });
+
+            });
+
+            //开始时间输入框
+            window.begintime = function(e){
+
+                var elem = $(e).parents('tr');//行对象
+                var dataindex = elem.attr("data-index");//行坐标
+                var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                var tablename = tableelem.attr("name");//table名称
+                var tablenamedata = planmap.get(tablename);//当前table所有数据
+
+                $.each(tablenamedata,function(index,value){
+                    if(value.LAY_TABLE_INDEX==dataindex){
+                        value.stagebegin = $(e)[0].value;
+                    }
+                });
+
+            }
+
+            //结束时间输入框
+            window.endtime = function(e){
+
+                var elem = $(e).parents('tr');//行对象
+                var dataindex = elem.attr("data-index");//行坐标
+                var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                var tablename = tableelem.attr("name");//table名称
+                var tablenamedata = planmap.get(tablename);//当前table所有数据
+
+                $.each(tablenamedata,function(index,value){
+                    if(value.LAY_TABLE_INDEX==dataindex){
+                        value.stageend = $(e)[0].value;
+                    }
+                });
+
+            }
+
+            //种植计划保存数据开始输入框
+            window.savebegintime = function(e){
+
+                var elem = $(e).parents('tr');//行对象
+                var dataindex = elem.attr("data-index");//行坐标
+                var tableelem = elem.parents('.layui-show').children('table');//获取当前table坐标
+                var tablename = tableelem.attr("name");//table名称
+                $.each(tabledata,function(index,value){
+                    if(value.LAY_TABLE_INDEX==dataindex&&tablename==value.growingperiod){
+                        value.stagebegin = $(e)[0].value;
+                    }
+                });
+
+            }
+
+            //种植计划保存数据结束输入框
+            window.saveendtime = function(e){
+
+                var elem = $(e).parents('tr');//行对象
+                var dataindex = elem.attr("data-index");//行坐标
+                var tableelem = elem.parents('.layui-show').children('table');//获取当前table坐标
+                var tablename = tableelem.attr("name");//table名称
+                $.each(tabledata,function(index,value){
+                    if(value.LAY_TABLE_INDEX==dataindex&&tablename==value.growingperiod){
+                        value.stageend = $(e)[0].value;
+                    }
+                });
+
+            }
+
+            //投入品弹窗
+            var inputcontabledata = [];
+            var inputtabledata = [];
+            window.inputtext = function(e){
+
+                layer.open({
+                    type: 1,
+                    title:'添加投入品',
+                    btn: ['保存', '关闭'],
+                    maxmin: true,
+                    area: ['726px', '600px'],
+                    scrollbar: false,
+                    content: $('#inputpage'),
+                    success: function(layero, index){
+
+                        $.ajax({
+                            url:"${contextPath}/plantingplan/getInput",
+                            async:true,
+                            type:"post",
+                            success:function(data){
+                                if(typeof(data) == 'string'){
+                                    data = JSON.parse(data)
+                                }
+                                table.render({
+                                    elem: '#inputtable'
+                                    ,data: data.data
+                                    ,page: true
+                                    ,cols: [[ //表头
+                                        {type:'checkbox'}
+                                        ,{field: 'enteringgoodscode', title: '投入品编号'}
+                                        ,{field: 'enteringgoodsname', title: '投入品名称'}
+                                        ,{field: 'specification', title: '投入品规格'}
+                                        ,{field: 'manufacturer', title: '生产厂家'}
+                                    ]],
+                                    done: function(res, curr, count){
+                                        //如果是异步请求数据方式，res即为你接口返回的信息。
+                                        //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                                        inputtabledata = res.data;
+
+                                    }
+                                });
+
+                            }
+                        });
+
+                        var elem = $(e).parents('tr');//行对象
+                        var dataindex = elem.attr("data-index");//行坐标
+                        var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                        var tablename = tableelem.attr("name");//table名称
+                        var tablenamedata = planmap.get(tablename);//当前table所有数据
+
+                        $.each(tablenamedata,function(index,value){
+                            if(value.LAY_TABLE_INDEX==dataindex&&value.inputcon){
+                                inputcontabledata = value.inputcon;
+                            }
+                        });
+
+                        table.render({
+                            elem: '#inputcontable'
+                            ,data: inputcontabledata
+                            ,cols: [[ //表头
+                                {type:'numbers', title: '序号'}
+                                ,{field: 'enteringgoodsname', title: '投入品名称'}
+                                ,{field: 'specification', title: '规格'}
+                                ,{field: 'number', title: '使用量',edit: 'text'}
+                                ,{title: '操作',align:'center', toolbar: '#bar'}
+                            ]],
+                            done: function(res, curr, count){
+                                //如果是异步请求数据方式，res即为你接口返回的信息。
+                                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                                inputcontabledata = res.data;
+
+                            }
+                        });
+
+                    },
+                    yes: function(index, layero){
+                        var inputcontabledatacopy = [];
+                        $.each(inputcontabledata,function(index,value){
+                            if(value.length != 0){
+                                inputcontabledatacopy.push(value);
+
+                            }
+                        });
+
+                        var elem = $(e).parents('tr');//行对象
+                        var dataindex = elem.attr("data-index");//行坐标
+                        var tableelem = elem.parents('.layui-table-view').children('table');//获取当前table坐标
+                        var tablename = tableelem.attr("name");//table名称
+                        var tablenamedata = planmap.get(tablename);//当前table所有数据
+
+                        $.each(tablenamedata,function(index,value){
+                            if(value.LAY_TABLE_INDEX==dataindex){
+                                value.inputcon = inputcontabledatacopy;
+                            }
+                        });
+                        //投入品回显
+                        if(inputcontabledatacopy.length!=0){
+
+                            $(e).removeClass();
+                            $(e).html("");
+                            $.each(inputcontabledatacopy,function(index,value){
+
+                                $(e).append(value.enteringgoodsname);
+
+                            });
+                        } else {
+                            $(e).html("");
+                            $(e).addClass("layui-icon layui-icon-more");
+                        }
+
+                        layer.close(index);
+                    },
+                    end: function(){
+                        $("input[name=enteringgoodsname]").val("");
+                        table.reload('inputcontable', {
+                            data: []
+                        });
+
+                    }
+                });
+            }
+
+            //监听投入品删除方法
+            table.on('tool(inputcontablefilter)', function(obj){
+                if(obj.event === 'del'){
+
+                    obj.del();
+
+                };
+            });
+
+            //投入品复选框单击事件
+            table.on('checkbox(inputtablefilter)', function(obj){
+
+                inputcontabledata = [];
+
+                $.each(inputtabledata,function(index,value){
+
+                    if(value.LAY_CHECKED) {
+                        inputcontabledata.push(value);
+                    }
+
+                });
+
+                table.reload('inputcontable', {
+                    data: inputcontabledata
+                });
+
+            });
+            //投入品搜索
+            window.inputsearch = function(e){
+
+                $.ajax({
+                    url:"${contextPath}/plantingplan/getInput",
+                    async:true,
+                    type:"post",
+                    data:{"enteringgoodsname":$("input[name=enteringgoodsname]").val()},
+                    success:function(data){
+                        if(typeof(data) == 'string'){
+                            data = JSON.parse(data)
+                        }
+
+                        //执行重载
+                        table.reload('inputtable',{
+                            data: data.data
+
+                        });
+
+                    }
+                });
+
+            }
+
+        });
+    </script>
+    <script type="text/html" id="plantingclassifytool">
+        <select name="plantingclassifytool" lay-filter="plantingclassifytool" lay-search>
+            <option value="">请选择</option>
+            {{# layui.each(${fOC_FarmOperationClassify}, function(index, item){ }}
+            <option value={{ item.classifyoperationcode }}>{{ item.classifyoperationname }}</option>
+            {{# }); }}
+        </select>
+    </script>
+    <script type="text/html" id="plantingoperationtool">
+        <select name="plantingoperationtool" lay-filter="plantingoperationtool" lay-search>
+            <option value="">请选择</option>
+        </select>
+    </script>
+    <script type="text/html" id="inputtool">
+        <div name="input" class="layui-icon layui-icon-more" "inputtext(this)"></div>
+    </script>
+    <script type="text/html" id="farmmachinerytool">
+        <select name="farmmachinerytool" lay-filter="farmmachinerytool" lay-search>
+            <option value="">请选择</option>
+            <option value="1">农机</option>
+        </select>
+    </script>
+    <script type="text/html" id="stagetool">
+        第<input name="stagebegin" type="text" class="layui-input" style="width:30px;display:inline;" "begintime(this)">天-第
+        <input name="stageend" type="text" class="layui-input" style="width:30px;display:inline;" "endtime(this)">天
+    </script>
+
+    <script type="text/html" id="savestagetool">
+        第<input name="savestagebegin" type="text" class="layui-input" style="width:30px;display:inline;" "savebegintime(this)">天-第
+        <input name="savestageend" type="text" class="layui-input" style="width:30px;display:inline;" "saveendtime(this)">天
+    </script>
+
+    <!--弹出-->
+    <div id="inputpage" style="display:none;width:696px;padding:15px;">
+
+        <!--搜索-->
+
+        <form class="layui-form layui-form-pane1" action="">
+            <div class="layui-form-item">
+
+
+                <label class="layui-form-label" style=" width:80px;">投入品类型</label>
+                <div class="layui-input-inline" style="width:140px;">
+                    <select name="enteringgoodstype" >
+                        <option value="农药">农药</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline" style="width:200px;">
+                    <input type="text" name="enteringgoodsname" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+                <button type="button" class="layui-btn" "inputsearch(this)">搜索</button>
+
+            </div>
+        </form>
+
+        <table id="inputtable" lay-filter="inputtablefilter"></table>
+
+        <table id="inputcontable" lay-filter="inputcontablefilter"></table>
+
+    </div>
+</div>
+</body>
+</html>
+

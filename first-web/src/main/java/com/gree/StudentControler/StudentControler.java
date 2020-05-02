@@ -1,7 +1,6 @@
 package com.gree.StudentControler;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.gree.kafka.producer.UpdateKafkaService;
 import com.gree.user.daomain.Student;
 import io.swagger.annotations.Api;
@@ -9,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,11 +48,11 @@ public class StudentControler {
         String topic = "studentTopic";
         String key = "student";
         boolean b = false;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 2; i++) {
             student.setId(String.valueOf(i));
             student.setAddress("地球+" + i);
             student.setAge(18);
-            student.setPhone("11022223333");
+            student.setPhone("66666666666");
             student.setEmail("diqiu@uu.ccc");
             student.setIdCar(UUID.randomUUID().toString());
             String s = JSON.toJSONString(student);
