@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <div id="dlrt" class="dlrt" >
+    <!-- div控制 -->
+    <!-- 在触发莫某一个事件之后，对div 进行选择性的展示。 -->
+        <div id="btn" style="display: block"><p><a href="#">详细……</a><p></div>
+        <div id="btnSq" style="display:none"><p><a href="#">收起……</a><p></div>
+            <c:forEach items="${users}" varStatus="status" var="user">
+                    <p>● ${user.name}</p>
+                </c:forEach>
+  </div>
+</body>
+</html>

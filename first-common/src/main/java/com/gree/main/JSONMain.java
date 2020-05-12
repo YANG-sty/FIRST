@@ -32,7 +32,12 @@ public class JSONMain {
         }
         Object o = JSON.toJSON(students);
         String s = String.valueOf(o);
-        System.out.println(s);
+
+        System.out.println("JSON.toJSON---->" + s);
+
+        String s2 = JSON.toJSONString(student);
+        System.out.println("JSON.toJSONString---->" + s2);
+
 
 
         /**
