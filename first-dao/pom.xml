@@ -17,6 +17,34 @@
             <groupId>com.sys.gree</groupId>
             <artifactId>first-domain</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.sys.gree</groupId>
+            <artifactId>first-export</artifactId>
+        </dependency>
+
+        <!-- mysql驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ojdbc</groupId>
+            <artifactId>ojdbc</artifactId>
+        </dependency>
+
+        <!-- mongodb 驱动 -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 

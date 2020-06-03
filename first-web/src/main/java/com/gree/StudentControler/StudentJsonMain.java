@@ -2,7 +2,7 @@ package com.gree.StudentControler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gree.user.daomain.Student;
+import com.gree.first.user.daomain.Student;
 
 import java.util.UUID;
 import java.util.function.Consumer;

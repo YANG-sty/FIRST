@@ -1,8 +1,8 @@
 package com.gree.StudentControler;
 
 import com.alibaba.fastjson.JSON;
-import com.gree.kafka.producer.UpdateKafkaService;
-import com.gree.user.daomain.Student;
+import com.gree.test.kafka.producer.UpdateKafkaService;
+import com.gree.first.user.daomain.Student;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -130,9 +130,20 @@
                 <version>3.0.1</version>
             </dependency>
             <dependency>
-                <groupId>com.baonidou</groupId>
+                <groupId>com.baomidou</groupId>
                 <artifactId>mybatisplus-spring-boot-starter</artifactId>
-                <version>3.0.1</version>
+                <version>1.0.5</version>
+            </dependency>
+            <!-- oracle 6 驱动 -->
+            <dependency>
+                <groupId>ojdbc</groupId>
+                <artifactId>ojdbc</artifactId>
+                <version>14</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>mssql-jdbc</artifactId>
+                <version>6.4.0.jre8</version>
             </dependency>
 
             <!-- 加密 -->
@@ -140,6 +151,18 @@
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>2.1.2</version>
+            </dependency>
+
+            <!-- mongodb -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                <version>2.2.4.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>3.6.4</version>
             </dependency>
 
             <!-- hutool 工具类 5.0 jdk 1.8+ -->
