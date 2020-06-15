@@ -30,8 +30,18 @@ public class JSONMain {
             student.setPhone("c" + i);
             students.add(student);
         }
-        Object o = JSON.toJSON(students);
-        String s = String.valueOf(o);
+
+        System.out.println(students.toString());
+        Object o = students.get(0);
+        System.out.println(o);
+        Student abc = (Student) o;
+        System.out.println(abc.getAge());
+
+
+        System.out.println("-------------------");
+        
+        Object object = JSON.toJSON(students);
+        String s = String.valueOf(object);
 
         System.out.println("JSON.toJSON---->" + s);
 

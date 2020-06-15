@@ -61,6 +61,10 @@ public class MybatisConfig {
 
         //配置多数据源
         Map<Object, Object> dsMap = Maps.newHashMap();
+        /**
+         * 在这里配置的数据源必须都是存在，并且能够正常使用，否则系统启动会失败
+         * 将配置无效的数据源进行注释，能够正常的使用系统。
+         */
         dsMap.put(DataSourcess.MASTER_DB, hikariDBProperties.getMasterDB());
 //        dsMap.put(DataSourcess.SECEND_DB, hikariDBProperties.getSecendDB());
 //        dsMap.put(DataSourcess.THIRD_DB, hikariDBProperties.getThirdDB());

@@ -198,9 +198,35 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
+                    <!-- 防止打包的时候对 excle 进行强制转码，避免打包后乱码 -->
+                    <nonFilteredFileExtensions>xls</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>xlsx</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>dat</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>eot</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>ttf</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>woff</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>svg</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>docx</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>pdf</nonFilteredFileExtensions>
                 </configuration>
+            </plugin>
+            <!-- deploy 插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <!-- sonar 插件 -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.7.0.1746</version>
             </plugin>
 
         </plugins>
