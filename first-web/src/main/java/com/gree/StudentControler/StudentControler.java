@@ -45,10 +45,10 @@ public class StudentControler {
         consumer.accept(string);
         Student student = JSON.parseObject(string, Student.class);
 
-        String topic = "studentTopic";
-        String key = "student";
+        String topic = "student";
+//        String key = "student";
         boolean b = false;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 300; i++) {
             student.setId(String.valueOf(i));
             student.setAddress("地球+" + i);
             student.setAge(18);
@@ -57,7 +57,7 @@ public class StudentControler {
             student.setIdCar(UUID.randomUUID().toString());
             String s = JSON.toJSONString(student);
 
-            b = updateKafkaService.sendMessage(topic, key, s);
+            b = updateKafkaService.sendMessage(topic, student.getAddress(), s);
         }
         return b;
     }

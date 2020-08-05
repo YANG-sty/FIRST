@@ -36,4 +36,7 @@ public class Student implements Serializable {
     //成绩
     private Subject subject;
 
+    //错误信息
+    private String errorMsg;
+
 }

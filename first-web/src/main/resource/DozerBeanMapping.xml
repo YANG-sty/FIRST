@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <!-- 日期转换级别 全局 -->
+<!--<date-format>yyyy-MM-dd HH:mm:ss</date-format>-->
+<stop-on-errors>true</stop-on-errors>
+<wildcard>true</wildcard>
+<custom-converters>
+    <!-- these are always bi-directional -->
+    <converter type="com.github.dozermapper.core.converters.TestCustomConverter">
+        <class-a>com.gree.first.user.daomain.Student</class-a>
+        <class-b>com.gree.first.user.daomain.User</class-b>
+        <field>
+            <a>id,name</a>
+            <b>id,userName</b>
+        </field>
+    </converter>
+
+    <!-- 类级别 -->
+    <!--<converter type="com.github.dozermapper.core.converters.TestCustomConverter" date-format="yyyy-MM-dd HH:mm:ss">
+        <class-a>com.gree.first.user.daomain.Student</class-a>
+        <class-b>com.gree.first.user.daomain.User</class-b>
+    </converter>-->
+
+    <!--<converter type="com.github.dozermapper.core.converters.TestCustomConverter">
+        <class-a>com.gree.first.user.daomain.Student</class-a>
+        <class-b>com.gree.first.user.daomain.User</class-b>
+        <field>
+            &lt;!&ndash; 属性级别 &ndash;&gt;
+            <a date-format="yyyy-MM-dd HH:mm:ss">update</a>
+            <b>updateString</b>
+        </field>
+    </converter>-->
+
+</custom-converters>
+</configuration>

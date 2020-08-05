@@ -6,11 +6,16 @@
         <artifactId>FIRST</artifactId>
         <groupId>com.sys.gree</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>first-web</artifactId>
+
+    <!-- docker 版本 + 服务器地址 -->
+    <properties>
+        <docker.plugin.version>1.2.0</docker.plugin.version>
+        <docker.registry.url>127.0.0.1</docker.registry.url>
+    </properties>
 
     <dependencies>
         <!-- 引入 service 模块，该模块已经引入了 common 模块的pom 所以这里不用再次进行引入 -->
@@ -18,6 +23,8 @@
             <groupId>com.sys.gree</groupId>
             <artifactId>first-service</artifactId>
         </dependency>
+
+        <!-- jasypt -->
 
         <!-- web 模块需要的其他jar包 -->
         <!-- 权限控制 shiro -->
@@ -39,5 +46,38 @@
 
     </dependencies>
 
+
+
+    <build>
+        <plugins>
+            <!-- maven docker -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker.plugin.version}</version>
+                <configuration>
+                    <!-- imageName:镜像的名称 可以通过${project.groupId}/${project.artifactId}:${project.version} 动态制定镜像名称 -->
+                    <imageName>${docker.registry.url}/first/${project.name}:${project.version}</imageName>
+                    <!--baseImage: 基础镜像，这里是相当于Dockerfile的FROM java-->
+<!--                    <baseImage>java</baseImage>-->
+                    <!-- entrypoint去运行这个jar -->
+<!--                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>-->
+                    <!-- copy the service's jar file from target into the root directory of the image -->
+                    <dockerDirectory>${project.basedir}</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <serverId>docker-hub</serverId>
+                    <registryUrl>https://index.docker.io/v1/</registryUrl>
+                </configuration>
+
+
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
