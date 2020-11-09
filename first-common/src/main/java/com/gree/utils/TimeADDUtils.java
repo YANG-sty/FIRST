@@ -27,9 +27,14 @@ public class TimeADDUtils {
         //如果要之后的时间，则将后面的参数变为正数，里面还有其他的年月日等的操作，具体看自己的需求
         calendar.add(Calendar.HOUR,-1);
         calendar.add(Calendar.MINUTE,-20);
+//        calendar.add(Calendar.DAY_OF_MONTH, -7);
+        calendar.add(Calendar.DAY_OF_WEEK, -7);
         Date time = calendar.getTime();
         String format = simpleDateFormat.format(time);
         System.out.println("--------------------->" + format);
+
+        boolean before = time.before(date);
+        System.out.println(before);
 
     }
 }
