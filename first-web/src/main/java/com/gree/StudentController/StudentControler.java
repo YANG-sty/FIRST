@@ -2,7 +2,7 @@ package com.gree.StudentController;
 
 import com.alibaba.fastjson.JSON;
 import com.gree.test.kafka.producer.UpdateKafkaService;
-import com.gree.first.user.daomain.Student;
+import com.gree.first.user.domain.Student;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -25,7 +25,6 @@ import java.util.function.Consumer;
 //@Controller//试图返回一个页面
 @RestController//返回json/xml数据
 @RequestMapping("/api/StudentKafka")
-
 public class StudentControler {
 
     @Autowired

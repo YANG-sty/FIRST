@@ -1,12 +1,12 @@
 package com.gree.config.mybatis;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.toolkit.TableInfoHelper;
+import com.baomidou.mybatisplus.entity.TableFieldInfo;
+import com.baomidou.mybatisplus.entity.TableInfo;
+import com.baomidou.mybatisplus.enums.FieldFill;
+import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
+import com.baomidou.mybatisplus.toolkit.TableInfoHelper;
 import com.gree.context.UserContextHolder;
-import com.gree.first.user.daomain.User;
+import com.gree.first.user.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Component
-public class MpFillHandler implements MetaObjectHandler {
+public class MpFillHandler extends MetaObjectHandler {
 
     private final static String CREATE = "creator";
     private final static String CREATE_TIME = "createTime";

@@ -11,16 +11,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>first-service</artifactId>
+    <name>first-service</name>
 
     <dependencies>
         <dependency>
             <groupId>com.sys.gree</groupId>
             <artifactId>first-dao</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.sys.gree</groupId>
             <artifactId>first-export</artifactId>
         </dependency>
+
+        <!--<dependency>
+            <groupId>com.sys.gree</groupId>
+            <artifactId>first-manager</artifactId>
+        </dependency>-->
 
         <!-- service 基本上在开发过程中还需要引入其他的jar包 -->
         <!-- kafka -->

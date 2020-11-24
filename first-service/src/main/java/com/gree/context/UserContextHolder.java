@@ -1,7 +1,7 @@
 package com.gree.context;
 
 import com.gree.first.utils.HttpContextUtils;
-import com.gree.first.user.daomain.User;
+import com.gree.first.user.domain.User;
 
 /**
  * 获取用户上下文

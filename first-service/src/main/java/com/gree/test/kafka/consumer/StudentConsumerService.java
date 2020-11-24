@@ -1,11 +1,9 @@
 package com.gree.test.kafka.consumer;
 
 import com.alibaba.fastjson.JSON;
-import com.gree.first.user.daomain.Student;
+import com.gree.first.user.domain.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Service;
 
@@ -165,7 +163,7 @@ public class StudentConsumerService {
      * @param recordList
      * @param acknowledgment
      */
-    @KafkaListener(id = "teacher-Consumer-Batch", topics = {"teacher"}, groupId = "teacherGroupBatch")
+//    @KafkaListener(id = "teacher-Consumer-Batch", topics = {"teacher"}, groupId = "teacherGroupBatch")
     public void teacherListen(List<ConsumerRecord<String, String>> recordList, Acknowledgment acknowledgment) {
 
         recordList.forEach(record -> {

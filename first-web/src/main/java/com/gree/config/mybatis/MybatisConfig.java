@@ -1,7 +1,7 @@
 package com.gree.config.mybatis;
 
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
+import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
 import com.google.common.collect.Maps;
 import com.gree.first.contants.DataSourcess;
 import com.gree.first.utils.DynamicDataSource;

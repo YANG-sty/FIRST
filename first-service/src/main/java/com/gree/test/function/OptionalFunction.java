@@ -1,8 +1,8 @@
 package com.gree.test.function;
 
 
-import com.gree.first.user.daomain.Student;
-import com.gree.first.user.daomain.Subject;
+import com.gree.first.user.domain.Student;
+import com.gree.first.user.domain.Subject;
 
 import java.util.Optional;
 

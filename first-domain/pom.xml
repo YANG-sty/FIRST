@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>first-domain</artifactId>
+    <name>first-domain</name>
 
     <dependencies>
         <dependency>

@@ -1,7 +1,7 @@
 package com.gree.test.encryptor;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gree.first.user.daomain.Student;
+import com.gree.first.user.domain.Student;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.Test;

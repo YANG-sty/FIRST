@@ -11,11 +11,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>first-export</artifactId>
+    <name>first-export</name>
 
     <dependencies>
         <dependency>
             <groupId>com.sys.gree</groupId>
             <artifactId>first-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sys.gree</groupId>
+            <artifactId>first-common</artifactId>
         </dependency>
     </dependencies>
 

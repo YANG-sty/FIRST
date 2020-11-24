@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="ehcache.xsd">
-    <diskStore path="java.io.tmpdir"/>
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir/ehcache"/>
+
     <defaultCache
             maxElementsInMemory="50000"
             eternal="false"
@@ -15,7 +19,7 @@
     />
 
     <!-- 全局变量，永不过期 -->
-    <ehcache
+    <cache
             name="CONSTANT"
             maxElementsInMemory="50000"
             eternal="true"

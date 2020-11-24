@@ -8,8 +8,8 @@
 <custom-converters>
     <!-- these are always bi-directional -->
     <converter type="com.github.dozermapper.core.converters.TestCustomConverter">
-        <class-a>com.gree.first.user.daomain.Student</class-a>
-        <class-b>com.gree.first.user.daomain.User</class-b>
+        <class-a>com.gree.first.user.domain.Student</class-a>
+        <class-b>com.gree.first.user.domain.User</class-b>
         <field>
             <a>id,name</a>
             <b>id,userName</b>
