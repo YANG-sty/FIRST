@@ -1,4 +1,4 @@
-package com.gree.StudentController;
+package com.gree.student.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 /**
  * Create by yang_zzu on 2020/4/21 on 12:16
  */
-public class StudentJsonMain {
+public class StudentJsonMainController {
 
     public static void main(String[] args) {
         Student student = new Student();

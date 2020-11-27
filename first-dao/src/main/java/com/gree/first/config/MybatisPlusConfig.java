@@ -1,10 +1,9 @@
-package com.gree.config.mybatis;
+package com.gree.first.config;
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
 import com.google.common.collect.Maps;
 import com.gree.first.contants.DataSourcess;
-import com.gree.first.utils.DynamicDataSource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,10 +24,10 @@ import java.util.Map;
 @Configuration
 //order 表示 事务的执行顺序，引入了 多数据源，所以让spring事务的aop在多数据源的aop后面
 @EnableTransactionManagement(order = 2)
-public class MybatisConfig {
+public class MybatisPlusConfig {
 
     @Autowired
-    HikariDBProperties hikariDBProperties;
+    HiKariDBProperties hiKariDBProperties;
 
     /**
      * 分页插件
@@ -57,7 +56,7 @@ public class MybatisConfig {
     @Bean(name="dynamicDataSource")
     public DataSource dynamicDataSource() {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
-        dynamicDataSource.setDefaultTargetDataSource(hikariDBProperties.getMasterDB());
+        dynamicDataSource.setDefaultTargetDataSource(hiKariDBProperties.getMasterDB());
 
         //配置多数据源
         Map<Object, Object> dsMap = Maps.newHashMap();
@@ -65,9 +64,9 @@ public class MybatisConfig {
          * 在这里配置的数据源必须都是存在，并且能够正常使用，否则系统启动会失败
          * 将配置无效的数据源进行注释，能够正常的使用系统。
          */
-        dsMap.put(DataSourcess.MASTER_DB, hikariDBProperties.getMasterDB());
-//        dsMap.put(DataSourcess.SECEND_DB, hikariDBProperties.getSecendDB());
-//        dsMap.put(DataSourcess.THIRD_DB, hikariDBProperties.getThirdDB());
+        dsMap.put(DataSourcess.MASTER_DB, hiKariDBProperties.getMasterDB());
+        dsMap.put(DataSourcess.SECEND_DB, hiKariDBProperties.getSecendDB());
+//        dsMap.put(DataSourcess.THIRD_DB, hiKariDBProperties.getThirdDB());
 
         dynamicDataSource.setTargetDataSources(dsMap);
 

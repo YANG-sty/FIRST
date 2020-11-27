@@ -1,4 +1,4 @@
-package com.gree.StudentController;
+package com.gree.student.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.gree.test.kafka.producer.UpdateKafkaService;
@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 //@Controller//试图返回一个页面
 @RestController//返回json/xml数据
 @RequestMapping("/api/StudentKafka")
-public class StudentControler {
+public class StudentController {
 
     @Autowired
     UpdateKafkaService updateKafkaService;

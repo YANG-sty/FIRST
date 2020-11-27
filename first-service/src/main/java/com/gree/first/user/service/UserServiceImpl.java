@@ -2,6 +2,8 @@ package com.gree.first.user.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.gree.first.annotation.RoutingDataSource;
+import com.gree.first.contants.DataSourcess;
 import com.gree.first.user.dao.UserMapper;
 import com.gree.first.user.domain.User;
 import com.gree.first.user.dto.UserDto;
@@ -52,4 +54,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return stringSet;
     }
+
 }

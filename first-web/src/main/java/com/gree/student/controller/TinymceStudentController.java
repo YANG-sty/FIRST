@@ -1,4 +1,4 @@
-package com.gree.StudentController;
+package com.gree.student.controller;
 
 import com.gree.first.bean.ResultVO;
 import org.apache.commons.lang.StringUtils;

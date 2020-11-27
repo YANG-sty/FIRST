@@ -1,4 +1,4 @@
-package com.gree.config.mybatis;
+package com.gree.first.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
@@ -7,13 +7,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * Create by yang_zzu on 2020/4/15 on 20:39
+ * HiKari 多数据源配置，获得 Properties 中的配置信息
+ * @author yangLongFei 2020-11-27-19:26
  */
-@Getter
-@Setter
 @Component
 @ConfigurationProperties(prefix = "spring.datasource")
-public class HikariDBProperties {
+@Getter
+@Setter
+public class HiKariDBProperties {
     private HikariDataSource masterDB;
     private HikariDataSource secendDB;
     private HikariDataSource thirdDB;

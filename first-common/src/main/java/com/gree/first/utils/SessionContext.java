@@ -18,7 +18,7 @@ public class SessionContext {
     private static Map<String, HttpSession> sessionMap;
 
     //单例模式
-    public SessionContext() {
+    private SessionContext() {
         sessionMap = new ConcurrentHashMap<>();
     }
 

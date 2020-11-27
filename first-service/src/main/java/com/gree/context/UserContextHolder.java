@@ -1,5 +1,6 @@
 package com.gree.context;
 
+import com.gree.first.user.dto.UserDto;
 import com.gree.first.utils.HttpContextUtils;
 import com.gree.first.user.domain.User;
 
@@ -14,8 +15,8 @@ public class UserContextHolder {
      * 当前登录用户
      * @return user
      */
-    public static User getCurrentUser() {
+    public static UserDto getCurrentUser() {
         Object user = HttpContextUtils.getHttpSession().getAttribute("user");
-        return (User) user;
+        return (UserDto) user;
     }
 }

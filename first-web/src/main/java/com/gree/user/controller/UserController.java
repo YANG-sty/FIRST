@@ -1,4 +1,4 @@
-package com.gree.user;
+package com.gree.user.controller;
 
 import com.gree.beans.CommonUserDto;
 import com.gree.first.user.dto.UserDto;
@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author yangLongFei 2020-11-21-16:24
@@ -21,6 +22,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @Slf4j
 public class UserController {
+
+    /**
+     * 在请求的时候，参数的名称必须为 sessionid, 否则切点无法正常的获得 session 中的数据
+     */
+    @GetMapping("/main")
+    public ModelAndView main(String sessionid, ModelAndView modelAndView) {
+        modelAndView.setViewName("firstgree/main");
+        return modelAndView;
+    }
 
     @RequestMapping({"/", "/index"})
     public String toIndex(Model model) {

@@ -1,4 +1,4 @@
-package com.gree.config.web;
+package com.gree.config.webconfig;
 
 import com.gree.first.utils.SessionContext;
 import org.springframework.stereotype.Component;

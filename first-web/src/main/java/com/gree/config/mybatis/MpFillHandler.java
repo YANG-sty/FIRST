@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
 import com.baomidou.mybatisplus.toolkit.TableInfoHelper;
 import com.gree.context.UserContextHolder;
 import com.gree.first.user.domain.User;
+import com.gree.first.user.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ import java.util.Optional;
 /**
  * mybatis-plus 自定义填充策略
  * #自定义填充策略接口实现
- * mybatis-plus.global-config.meta-object-handler=com.gree.config.MpFillHandler
+ * mybatis-plus.global-config.meta-object-handler=com.gree.config.mybatis.MpFillHandler
  * Create by yang_zzu on 2020/4/14 on 21:09
  */
 @Slf4j
@@ -33,7 +34,7 @@ public class MpFillHandler extends MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         //当前用户
-        User currentUser = UserContextHolder.getCurrentUser();
+        UserDto currentUser = UserContextHolder.getCurrentUser();
 
         String userName = currentUser.getUserName();
 
@@ -56,7 +57,7 @@ public class MpFillHandler extends MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
 
         //当前用户
-        User currentUser = UserContextHolder.getCurrentUser();
+        UserDto currentUser = UserContextHolder.getCurrentUser();
 
         String userName = currentUser.getUserName();
 
