@@ -25,6 +25,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    /**
+     * http://192.168.44.10:8081/greeFIRST/secendlogin?uslg=root&passwd=123
+     */
     @RequestMapping("/secendlogin")
     public ResultVO secendlogin(String uslg, String passwd, HttpSession httpSession) {
         //查询用户
@@ -47,6 +50,9 @@ public class LoginController {
 
     }
 
+    /**
+     * http://localhost:8081/greeFIRST/masterlogin?uslg=root&passwd=0
+     */
     @RequestMapping("/masterlogin")
     public ResultVO masterlogin(String uslg, String passwd, HttpSession httpSession) {
         //查询用户

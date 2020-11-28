@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>first-web</artifactId>
+    <packaging>jar</packaging>
     <name>first-web</name>
 
     <!-- docker 版本 + 服务器地址 -->
@@ -77,18 +78,18 @@
     <build>
         <plugins>
             <!-- maven docker -->
-            <plugin>
+            <!--<plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker.plugin.version}</version>
                 <configuration>
-                    <!-- imageName:镜像的名称 可以通过${project.groupId}/${project.artifactId}:${project.version} 动态制定镜像名称 -->
+                    &lt;!&ndash; imageName:镜像的名称 可以通过${project.groupId}/${project.artifactId}:${project.version} 动态制定镜像名称 &ndash;&gt;
                     <imageName>${docker.registry.url}/first/${project.name}:${project.version}</imageName>
-                    <!--baseImage: 基础镜像，这里是相当于Dockerfile的FROM java-->
-<!--                    <baseImage>java</baseImage>-->
-                    <!-- entrypoint去运行这个jar -->
-<!--                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>-->
-                    <!-- copy the service's jar file from target into the root directory of the image -->
+                    &lt;!&ndash;baseImage: 基础镜像，这里是相当于Dockerfile的FROM java&ndash;&gt;
+&lt;!&ndash;                    <baseImage>java</baseImage>&ndash;&gt;
+                    &lt;!&ndash; entrypoint去运行这个jar &ndash;&gt;
+&lt;!&ndash;                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>&ndash;&gt;
+                    &lt;!&ndash; copy the service's jar file from target into the root directory of the image &ndash;&gt;
                     <dockerDirectory>${project.basedir}</dockerDirectory>
                     <resources>
                         <resource>
@@ -102,7 +103,55 @@
                 </configuration>
 
 
+            </plugin>-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <!-- 防止打包的时候对 excle 进行强制转码，避免打包后乱码 -->
+                    <nonFilteredFileExtensions>xls</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>xlsx</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>dat</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>eot</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>ttf</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>woff</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>svg</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>docx</nonFilteredFileExtensions>
+                    <nonFilteredFileExtensions>pdf</nonFilteredFileExtensions>
+                </configuration>
             </plugin>
+
+            <!-- springboot maven 插件 -->
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.5.RELEASE</version>
+                <configuration>
+                    <mainClass>com.gree.GreeFIRSTApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- springboot war 包插件 -->
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <warName>GreeFirst</warName>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 

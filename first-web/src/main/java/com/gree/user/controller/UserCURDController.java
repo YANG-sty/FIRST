@@ -21,7 +21,7 @@ public class UserCURDController {
 
     /**
      * 验证自动填充
-     * http://localhost:8080/greeFIRST/userAdd?userName=xiaoming&&userPassword=123
+     * http://localhost:8081/greeFIRST/userAdd?userName=xiaoming&&userPassword=123
      */
     @RequestMapping("/userAdd")
     @ResponseBody
