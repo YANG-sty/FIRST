@@ -24,7 +24,15 @@ import java.util.Map;
 @Component
 public class MainAspect {
 
-    //主要是 切 public ModelAndView main(String sid, ModelAndView modelAndView)
+    /**
+     * 主要是 切 public ModelAndView main(String sid, ModelAndView modelAndView)
+     * 第一个*号：表示返回类型， *号表示所有的类型。
+     * 第二个*号：表示类名，*号表示任意的类名称
+     * 第三个*号：表示类名，*号表示任意的类名称
+     * 第四个*号：表示任意的参数类型
+     *
+     * *(..): *号表示所有的方法，后面括弧里面表示方法的参数，两个句点表示任何参数
+     */
     @Pointcut(value = "execution(* com.gree.*.controller.*.main(String, *))")
     private void cutPoint() {
 
@@ -42,8 +50,10 @@ public class MainAspect {
         ModelAndView modelAndView = (ModelAndView) joinPoint.getArgs()[1];
         Map<String, Object> map = new HashMap<>();
 
-        //添加一些其他的数据
+        //todo 添加一些其他的数据,返回给前端
         map.put("name", "root");
+
+
         modelAndView.addAllObjects(map);
 
     }
