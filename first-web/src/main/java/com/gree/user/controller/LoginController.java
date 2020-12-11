@@ -6,7 +6,10 @@ import com.gree.first.user.service.UserService;
 import com.gree.first.utils.ResultVO;
 import com.gree.first.utils.ResultVOUtils;
 import com.gree.first.utils.SessionContext;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +20,7 @@ import java.util.Map;
 /**
  * @author yangLongFei 2020-11-27-15:19
  */
+@Api(value = "登录页", tags = "登录页")
 @RestController
 public class LoginController {
 
@@ -28,7 +32,8 @@ public class LoginController {
     /**
      * http://192.168.44.10:8081/greeFIRST/secendlogin?uslg=root&passwd=123
      */
-    @RequestMapping("/secendlogin")
+    @GetMapping("/secendlogin")
+    @ApiOperation("登录页 - secendlogin")
     public ResultVO secendlogin(String uslg, String passwd, HttpSession httpSession) {
         //查询用户
         UserDto userDto = userSecendService.queryByName(uslg);
@@ -53,7 +58,8 @@ public class LoginController {
     /**
      * http://localhost:8081/greeFIRST/masterlogin?uslg=root&passwd=0
      */
-    @RequestMapping("/masterlogin")
+    @GetMapping("/masterlogin")
+    @ApiOperation("登录页 - masterlogin")
     public ResultVO masterlogin(String uslg, String passwd, HttpSession httpSession) {
         //查询用户
         UserDto userDto = userService.queryByName(uslg);

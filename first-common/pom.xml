@@ -228,7 +228,7 @@
             <artifactId>shiro-spring</artifactId>
         </dependency>
 
-        <!-- api 自动生成文档 -->
+        <!-- swagger api 自动生成文档 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
@@ -238,6 +238,17 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
+        </dependency>
+        <!-- swagger UI knife4j, 升级版的 swagger ,页面更加美观 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-ui</artifactId>
+            <version>2.0.5</version>
         </dependency>
 
         <!-- easypoi -->
