@@ -3,6 +3,7 @@ package com.gree.beans;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -49,5 +50,14 @@ public class CommonUserDto implements Serializable {
      * 资源
      */
     private String resource;
+
+
+    private String creator;
+
+    private Date createTime;
+
+    private String updator;
+
+    private Date updateTime;
 
 }

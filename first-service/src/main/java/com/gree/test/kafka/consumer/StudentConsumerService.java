@@ -28,8 +28,6 @@ public class StudentConsumerService {
      */
 //    @KafkaListener(id = "student-Consumer", topics = {"studentTopic"}, groupId = "studentGroup")
     public void studentListen(ConsumerRecord<String, String> record, Acknowledgment acknowledgment) {
-        //手动提交ack
-        acknowledgment.acknowledge();
 
         /*
         //运行到这里后暂停60s
@@ -51,6 +49,9 @@ public class StudentConsumerService {
 
             consumer.accept("offset; "+record.offset()+"------partion: "+record.partition() +"------>>>>>>>>>>>>>>>>>>>" + student.toString());
         }
+
+        //手动提交ack
+        acknowledgment.acknowledge();
 
     }
 

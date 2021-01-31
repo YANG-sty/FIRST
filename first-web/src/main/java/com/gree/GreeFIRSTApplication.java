@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * Create by yang_zzu on 2020/4/14 on 15:16
  */
-@SpringBootApplication(scanBasePackages = "com.gree", exclude =  { DataSourceAutoConfiguration.class, FreeMarkerAutoConfiguration.class, MongoAutoConfiguration.class, MongoDataAutoConfiguration.class })
+@SpringBootApplication(scanBasePackages = "com.gree", exclude =  { DataSourceAutoConfiguration.class, FreeMarkerAutoConfiguration.class/*, MongoAutoConfiguration.class, MongoDataAutoConfiguration.class */})
 @EnableScheduling
 @EnableEncryptableProperties
 @EnableRetry//启动重试机制

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -40,5 +41,19 @@ public class Student implements Serializable {
 
     //错误信息
     private String errorMsg;
+
+    /**
+     * 是否删除，0: 否， 1：是
+     */
+    private Integer isDelete;
+
+
+    private String creator;
+
+    private Date createTime;
+
+    private String updator;
+
+    private Date updateTime;
 
 }

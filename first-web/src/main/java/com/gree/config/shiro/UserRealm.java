@@ -117,7 +117,7 @@ public class UserRealm extends AuthorizingRealm {
         //获得 认证的时候，存储到 shiro 中的用户
         CommonUserDto user = ShiroUtils.getUser();
 
-        //todo 去数据库中查询数据
+        //todo 去数据库中查询用户的资源授权数据
         String[] split = user.getResource().split(",");
         Set<String> permissionByRoleIds = new HashSet<>();
         if (split.length > 0) {

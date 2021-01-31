@@ -58,7 +58,7 @@ public class SwaggerConfig {
                 .globalOperationParameters(aParameters)
                 .select()
                 //需要扫描的controller的包
-                .apis(RequestHandlerSelectors.basePackage("com.gree.user.controller")).paths(PathSelectors.any()).build();
+                .apis(RequestHandlerSelectors.basePackage("com.gree")).paths(PathSelectors.any()).build();
     }
 
     /**

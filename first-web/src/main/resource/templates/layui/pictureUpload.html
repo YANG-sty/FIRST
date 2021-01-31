@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button type="button" class="layui-btn" id="test1">
+    <i class="layui-icon">&#xe67c;</i>上传图片
+</button>
+<input type="text" id="pictureID" name="pictureID" />
+<div class="layui-upload-list">
+    <img class="layui-upload-img" name="picture" id="picture" th:value="*{picture}" width="300"/>
+    <p id="demo"></p>
+</div>
+
+</body>
+</html>
