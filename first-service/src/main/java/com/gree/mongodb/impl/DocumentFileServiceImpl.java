@@ -3,9 +3,10 @@ package com.gree.mongodb.impl;
 import com.gree.executor.DocumentUploadExcutor;
 import com.gree.first.mongodb.DocumentFileService;
 import com.gree.first.student.dto.Student;
-import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -58,7 +59,18 @@ public class DocumentFileServiceImpl implements DocumentFileService {
         //保存文档（数据）信息
         mongoTemplate.save(objectToSave);
 
-        return (String) id1;
+        return String.valueOf(id1);
     }
 
+    /**
+     * 根据id下载附件
+     *
+     * @param filedId
+     * @return
+     */
+    @Override
+    public GridFSDBFile downloadFiledById(String filedId) {
+        GridFSDBFile gridFSDBFile = gridFS.find(new ObjectId(filedId));
+        return gridFSDBFile;
+    }
 }

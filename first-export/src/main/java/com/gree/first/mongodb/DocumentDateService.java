@@ -3,8 +3,6 @@ package com.gree.first.mongodb;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.gree.first.student.dto.Student;
 
-import java.util.List;
-
 /**
  * @author yangLongFei 2021-01-28-9:05
  */

@@ -1,6 +1,6 @@
 package com.gree.first.mongodb;
 
-import org.bson.Document;
+import com.mongodb.gridfs.GridFSDBFile;
 
 import java.io.InputStream;
 
@@ -18,6 +18,13 @@ public interface DocumentFileService {
      * @return 文件的id
      */
     String uploadFile(InputStream inputStream, String fileName, String id, Class clazz);
+
+    /**
+     * 根据id下载附件
+     * @param filedId
+     * @return
+     */
+    GridFSDBFile downloadFiledById(String filedId);
 
 
 
