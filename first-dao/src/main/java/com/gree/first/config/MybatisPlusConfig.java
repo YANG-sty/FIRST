@@ -43,8 +43,9 @@ public class MybatisPlusConfig {
      * @return
      */
     @Bean
-    @Profile("dev")
+    @Profile("dev") //dev环境的开启
     public PerformanceInterceptor performanceInterceptor() {
+        //性能分析拦截器，用于输出每条 SQL 语句及其执行时间
         return new PerformanceInterceptor();
     }
 
