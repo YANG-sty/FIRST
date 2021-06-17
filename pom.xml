@@ -20,6 +20,14 @@
         <module>first-web</module>
     </modules>
 
+    <!-- spring boot 依赖 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+<!--        <version>2.2.12.RELEASE</version>-->
+        <version>2.0.3.RELEASE</version>
+    </parent>
+
     <!-- 对项目其他模块的版本进行统一的管理 -->
     <properties>
         <project.release.version>1.0-SNAPSHOT</project.release.version>
