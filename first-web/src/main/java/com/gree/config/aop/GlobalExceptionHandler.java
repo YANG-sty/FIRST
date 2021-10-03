@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 全局异常处理
  * @author yangLongFei 2021-03-29-16:48
  */
 @ControllerAdvice

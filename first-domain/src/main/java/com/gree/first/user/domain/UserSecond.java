@@ -16,8 +16,8 @@ import java.util.Date;
  * @author yangLongFei 2020-11-27-15:41
  */
 @Data
-@TableName("secend_user")
-public class UserSecend implements Serializable {
+@TableName("second_user")
+public class UserSecond implements Serializable {
     private static final long serialVersionUID = -3908616599881678280L;
 
     @TableId(value = "id", type = IdType.UUID)

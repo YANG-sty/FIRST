@@ -70,6 +70,7 @@ public class TinymceStudentController {
         OutputStream outputStream = null;
 
         try {
+            // 设置相应方式 content-disposition  attachment：下载   inline：预览
             response.setHeader("content-disposition", "attachment;filename="+ URLEncoder.encode(id, "UTF-8"));
             inputStream = new FileInputStream(url);
             int length = 0;
