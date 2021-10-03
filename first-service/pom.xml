@@ -16,6 +16,10 @@
     <dependencies>
         <dependency>
             <groupId>com.sys.gree</groupId>
+            <artifactId>first-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sys.gree</groupId>
             <artifactId>first-dao</artifactId>
         </dependency>
 
